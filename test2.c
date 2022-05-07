@@ -1,13 +1,28 @@
 int main()
 {
-		int a;
-		float b;
-        char c = 'c';
-        3+'c';
-        printf("%d %d" ,a,b);
-        printf("%d " ,3);
-        printf("%c " ,c);
-        printf("ccc");
-        return 0;
+		int a=0;
+
+		printf("%d\n",a);
+        if(1){
+            if(1){
+
+                int a=1;
+
+                printf("%d\n",a);
+                if(1){
+                     int a =2;
+                     printf("%d\n",a);
+
+
+                }
+                a=3;
+
+
+            }
+            printf("%d\n",a);
+            a=4;
+        }
+        printf("%d\n",a);
+
 
 }
