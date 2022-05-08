@@ -7,7 +7,7 @@
 
 ## Run
 You have to make the antlr-3.5.2-complete.jar and makefile in current folder and the environment of java has been installed,the run the following command:  
-*if you want to run test1.c with the simple C interpreter*
+(*if you want to run test1.c with the simple C interpreter*)
 ```shell
 make 
 java -cp antlr-3.5.2-complete.jar:. myInterp_test test1.c
