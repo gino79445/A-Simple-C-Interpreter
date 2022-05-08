@@ -2,6 +2,7 @@ void main()
 {
 		int a=1;
         int b=1;
+        int c;
 
 
         a+1;
@@ -11,11 +12,26 @@ void main()
         printf("%d\n",a);
         a = -1+-a;
         printf("%d\n",a);
+
+        int num,result;
+
+
+        printf("Please enter a number : ");
+        scanf("%d", &num);
+        if(num>10){
+            result = 3*(num-1);
+        }else{
+            result = num*(num-2);
+        }
+
+
+        printf("The result is %d\n", result);
+
+
         //ffffff
         /*hhhhh
 
         */
-
 
 		return;
 }

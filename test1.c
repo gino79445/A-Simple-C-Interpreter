@@ -5,9 +5,10 @@ int main()
 
           int a =3 ;
           int b =2 ;
+          printf("\"\\%% a==%d  , b==%d %%/\"\n",a,b);
           printf("enter 2 numbers: ");
           scanf("%d %d",&a ,&b);
-          printf("\"\\%% a==%d  , a==%d %%/\"\n",a,b);
+          printf("\"\\%% a==%d  , b==%d %%/\"\n",a,b);
           if(a>=b){
                 printf("a>=b\n");
              if(a==b){
@@ -45,6 +46,6 @@ int main()
           printf("output test:\n");
           printf("%d \\ %%\n ",a);
           printf("%d %d \t \\\\\n",b,c);
-          printf("\\\\a\\n\n");
+          printf("\"\\\\a\n\ta\n");
 
 }

@@ -24,24 +24,32 @@ options {
 program:(VOID|INT) MAIN '(' ')' '{'  statements[1,0] (RETURN (logic_arith_expression[0]  )? ';')? '}'
 	;
 
-declaration[int scope]:type Identifier ';'{ 
-		String str = $Identifier.text+Integer.toString(scope);
-		memory.put(str,0);
-		memorySize[scope] = memorySize[scope]+1;
-		
-		
-	   }
-           |type Identifier '=' logic_arith_expression[$scope]  ';'{
-           	    String str = $Identifier.text+Integer.toString(scope);
-	            memory.put(str,new Integer($logic_arith_expression.value));
-	            memorySize[scope] = memorySize[scope]+1;
-	            
-            }
-           ;
+declaration[int scope]:type a =Identifier
+			{ 
+				String str = $a.text+Integer.toString(scope);
+				memory.put(str,0);
+				memorySize[scope] = memorySize[scope]+1;
+	
+	   		} (',' b = Identifier
+		   	{ 
+				String str = $b.text+Integer.toString(scope);
+				memory.put(str,0);
+				memorySize[scope] = memorySize[scope]+1;
+				
+			
+		   	}
+		   	)* ';'
+		        |type Identifier '=' logic_arith_expression[$scope]  ';'{
+		                String str = $Identifier.text+Integer.toString(scope);
+			        memory.put(str,Integer.valueOf($logic_arith_expression.value));
+			        memorySize[scope] = memorySize[scope]+1;
+			            
+		         }
+		     
+		        ;
 
 type:INT
-   | FLOAT
-   | CHAR ;
+    ;
 
 statements[int flag,int scope] :statement[$flag,$scope] statements[$flag,$scope]
         |;
@@ -79,7 +87,6 @@ signExpr[int scope] returns [int value]:
 		  
 primaryExpr[int scope] returns [int value]
 	  : DEC_NUM  {$value = Integer.parseInt($DEC_NUM.text);}
-           | FLOAT_NUM 
            | Identifier 
            
            {    
@@ -103,8 +110,6 @@ primaryExpr[int scope] returns [int value]
 				
 		}
 	   }
-
-           | Char 
 	   | '(' logic_arith_expression[$scope] ')'  {$value = $logic_arith_expression.value;}
 
            ;
@@ -137,12 +142,8 @@ statement[int flag,int scope]: Identifier '=' logic_arith_expression[$scope] ';'
 	   }
          |IF '(' logic_arith_expression[$scope]')' 
          if_statements[(($logic_arith_expression.value>=1)&&($flag>=1))?1:0,scope+1] ((ELSE) => ELSE else_statements[(($logic_arith_expression.value>=1)||($flag<1))?1:0,scope+1]|  )
-	{
+	 {
 	
-		
-	
-	
-		
 		Iterator<Map.Entry<String, Integer>> it = memory.entrySet().iterator();
 		int i=1;
 		int n = memory.size();
@@ -155,19 +156,14 @@ statement[int flag,int scope]: Identifier '=' logic_arith_expression[$scope] ';'
 				//System.out.println(memorySize[scope+1]);
 				it.remove();
 			}
-			
-			
 			 
 			i=i+1;
 		} 
 		//System.out.println(memory);
 
-	}
+	 }
 	  
 	 |logic_arith_expression[$scope] ';'
-	 
-	
-	 |WHILE '(' logic_arith_expression[$scope] ')' if_statements[1,$scope]
 	 |SCANF '('STRING ',' '&' q = Identifier(',' '&' w = Identifier)?   ')' ';'
 	 {
 	 	if($flag>=1){
