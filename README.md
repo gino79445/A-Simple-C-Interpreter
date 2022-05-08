@@ -94,7 +94,7 @@ java -cp antlr-3.5.2-complete.jar:. myInterp_test test1.c
   //Example
   printf("\"\\\\a\n\ta\n");
   ```
-印出:
+output:
   ```shell
   "\\a
       a
